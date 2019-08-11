@@ -85,7 +85,7 @@ $ sudo nano /etc/transmission-daemon/settings.json
 }
 ```
 
-# CHANGE USER
+# CHANGE USER pi or root and accordingly change everywere same user
 ```
 sudo nano transmission-daemon.service
 ```
