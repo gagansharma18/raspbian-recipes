@@ -90,6 +90,12 @@ sudo nano transmission-daemon.service
 User=pi
 systemctl daemon-reload
 
+# check errors
+sudo service transmission-daemon start
+Job for transmission-daemon.service failed because the control process exited with error code.
+See "systemctl status transmission-daemon.service" and "journalctl -xe" for details.
+
+
 
 ```
 sudo systemctl start transmission-daemon
