@@ -1,4 +1,4 @@
-# TRY NEW 
+# INSTALL 
 ```
 $ sudo apt-get update && sudo apt-get install transmission-daemon
 ```
@@ -84,6 +84,12 @@ $ sudo nano /etc/transmission-daemon/settings.json
     "utp-enabled": true
 }
 ```
+
+# CHANGE USER
+sudo nano transmission-daemon.service
+User=pi
+
+
 ```
 sudo systemctl start transmission-daemon
 ```
