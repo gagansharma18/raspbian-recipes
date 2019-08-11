@@ -102,6 +102,8 @@ Job for transmission-daemon.service failed because the control process exited wi
 See "systemctl status transmission-daemon.service" and "journalctl -xe" for details.
 ```
 ```
+top  // transmission-daemon shoud start with pi user
+
 sudo chmod 644 /home/pi/.config/transmission-daemon/settings.json
 
 ```
