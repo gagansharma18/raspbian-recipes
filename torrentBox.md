@@ -3,7 +3,7 @@
 $ sudo apt-get update && sudo apt-get install transmission-daemon
 ```
 ```
-$ sudo systemctl stop transmission-daemon
+$ sudo service transmission-daemon stop
 ```
 ```
 $ sudo nano /etc/transmission-daemon/settings.json
@@ -24,16 +24,16 @@ $ sudo nano /etc/transmission-daemon/settings.json
     "blocklist-url": "http://www.example.com/blocklist",
     "cache-size-mb": 4,
     "dht-enabled": true,
-    "download-dir": "/var/lib/transmission-daemon/downloads",
+    "download-dir": "/media/pi/GBOX_DRIVE/Torrent_complete",
     "download-limit": 100,
     "download-limit-enabled": 0,
     "download-queue-enabled": true,
     "download-queue-size": 5,
-    "encryption": 1,
+    "encryption": 0,
     "idle-seeding-limit": 30,
     "idle-seeding-limit-enabled": false,
-    "incomplete-dir": "/var/lib/transmission-daemon/Downloads",
-    "incomplete-dir-enabled": false,
+    "incomplete-dir": "/media/pi/GBOX_DRIVE/Torrent_inprogress",
+    "incomplete-dir-enabled": true,
     "lpd-enabled": false,
     "max-peers-global": 200,
     "message-level": 1,
@@ -55,17 +55,17 @@ $ sudo nano /etc/transmission-daemon/settings.json
     "ratio-limit": 2,
     "ratio-limit-enabled": false,
     "rename-partial-files": true,
-    "rpc-authentication-required": true,
+    "rpc-authentication-required": false,
     "rpc-bind-address": "0.0.0.0",
     "rpc-enabled": true,
     "rpc-host-whitelist": "",
     "rpc-host-whitelist-enabled": true,
-    "rpc-password": "{51672671e9402abc55992da3ee7809f2c0662d10uLpcJwyX",
+    "rpc-password": "{6700081cd4a04f8f68b97f8222af4a6c815ad723sdBLllXS",
     "rpc-port": 9091,
     "rpc-url": "/transmission/",
-    "rpc-username": "transmission",
-    "rpc-whitelist": "127.0.0.1,192.168.1.40",
-    "rpc-whitelist-enabled": true,
+    "rpc-username": "pi",
+    "rpc-whitelist": "127.0.0.1,192.168.*.*",
+    "rpc-whitelist-enabled": false,
     "scrape-paused-torrents-enabled": true,
     "script-torrent-done-enabled": false,
     "script-torrent-done-filename": "",
@@ -77,7 +77,7 @@ $ sudo nano /etc/transmission-daemon/settings.json
     "speed-limit-up-enabled": false,
     "start-added-torrents": true,
     "trash-original-torrent-files": false,
-    "umask": 18,
+    "umask": 2,
     "upload-limit": 100,
     "upload-limit-enabled": 0,
     "upload-slots-per-torrent": 14,
@@ -86,15 +86,25 @@ $ sudo nano /etc/transmission-daemon/settings.json
 ```
 
 # CHANGE USER
+```
 sudo nano transmission-daemon.service
+```
+```
 User=pi
+```
+```
 systemctl daemon-reload
-
+```
 # check errors
+```
 sudo service transmission-daemon start
 Job for transmission-daemon.service failed because the control process exited with error code.
 See "systemctl status transmission-daemon.service" and "journalctl -xe" for details.
+```
+```
+sudo chmod 644 /home/pi/.config/transmission-daemon/settings.json
 
+```
 
 
 ```
