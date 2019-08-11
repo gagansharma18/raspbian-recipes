@@ -45,6 +45,7 @@ UUID=39d8e281-ccc7-444c-aa01-522d1d63875b /mnt/usbdrive auto defaults,user,nofai
 ```
 # add read write and execute permissin to torrent folder
 ```
+sudo chown -R debian-transmission:debian-transmission /mnt/usbdrive/
 sudo chmod -R a+rwx /mnt/usbdrive/
 ```
 
