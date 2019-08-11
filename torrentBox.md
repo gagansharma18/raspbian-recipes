@@ -88,6 +88,7 @@ $ sudo nano /etc/transmission-daemon/settings.json
 # CHANGE USER
 sudo nano transmission-daemon.service
 User=pi
+systemctl daemon-reload
 
 
 ```
