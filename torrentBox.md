@@ -87,14 +87,18 @@ $ sudo nano /etc/transmission-daemon/settings.json
 
 # CHANGE USER pi or root and accordingly change everywere same user
 ```
-sudo nano transmission-daemon.service
+sudo nano /lib/systemd/system/transmission-daemon.service
 ```
 ```
-User=pi
+User=root
 ```
 ```
 systemctl daemon-reload
 ```
+```
+sudo nano transmission-daemon.service
+```
+
 # check errors
 ```
 sudo service transmission-daemon start
