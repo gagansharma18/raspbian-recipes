@@ -177,3 +177,6 @@ sudo chmod -R a+rwx /mnt/usbdrive/
 ```
 \\gbox\Torrents
 ```
+
+# MOUNT A DRIVE 
+UUID=39d8e281-ccc7-444c-aa01-522d1d63875b /media/pi/GBOX_DRIVE auto defaults,user,nofail 0 1
