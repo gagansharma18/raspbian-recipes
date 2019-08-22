@@ -180,3 +180,16 @@ sudo chmod -R a+rwx /mnt/usbdrive/
 
 # MOUNT A DRIVE 
 UUID=39d8e281-ccc7-444c-aa01-522d1d63875b /media/pi/GBOX_DRIVE auto defaults,user,nofail 0 1
+
+
+# Installation steps of usbmount BEST SOLUTION:
+
+1. Install the package:
+```
+sudo apt-get install usbmount
+```
+2. Make sure it works in Stretch by changing MountFlags=slave to MountFlags=shared here:
+```
+sudo nano /lib/systemd/system/systemd-udevd.service
+```
+3. Reboot and it works!
