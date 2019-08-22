@@ -192,4 +192,7 @@ sudo apt-get install usbmount
 ```
 sudo nano /lib/systemd/system/systemd-udevd.service
 ```
-3. Reboot and it works!
+3. Reboot and it works! check the mount location by
+```
+df
+```
