@@ -1,3 +1,4 @@
+```
 I think with these instructions, this issue can be closed:
 
 I set my hostname to picam after installation and changing the default password.
@@ -39,3 +40,4 @@ sudo systemctl start motioneye
 // can pause and resume motion detection from a terminal or node-red etc. with commands:
 curl http://picam:7999/1/detection/pause -s -o /dev/null
 curl http://picam:7999/1/detection/start -s -o /dev/null
+```
