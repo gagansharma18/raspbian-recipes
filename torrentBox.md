@@ -92,6 +92,10 @@ sudo nano /lib/systemd/system/transmission-daemon.service
 ```
 User=root
 ```
+## RPI4
+```
+User=pi
+```
 ```
 systemctl daemon-reload
 ```
@@ -146,6 +150,18 @@ browseable = yes
 public = yes
 force user = pi
 only guest =no
+```
+## for RPI4 add this
+```
+[TORRENTS]
+  comment = Torrents
+  path = /mnt/usbdrive
+  valid users = pi
+  force group = pi
+  create mask = 0775
+  directory mask = 0775
+  read only = no
+  writeable = yes
 ```
 # get UUID of HDD
 ```
