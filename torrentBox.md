@@ -243,3 +243,16 @@ Code: Select all
 [    2.566177] scsi host0: usb-storage 2-1:1.0
 Typically, most drives are still performant with usb-storage. They may not be able to saturate a USB3.0 connection but should still get 150-200MB/s under most workloads.
 ```
+
+# AUTOMOUNT FIX WITH CONSOLE RPI4
+```
+/lib/systemd/system/systemd-udevd.service
+
+Before: PrivateMounts=yes
+
+After: PrivateMounts=no
+
+Then I rebooted and it was OK ;)
+```
+Note: If running Desktop headless:
+Use sudo raspi-config to set a screen resolution to something other than default.
