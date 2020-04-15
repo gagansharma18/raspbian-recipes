@@ -317,3 +317,7 @@ Compiled from:
 
 https://www.raspberrypi.org/forums/viewtopic.php?f=27&t=8714
 https://wiki.archlinux.org/index.php/Transmission
+
+
+# very new method
+https://pimylifeup.com/raspberry-pi-transmission/
