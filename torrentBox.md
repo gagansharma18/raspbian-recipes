@@ -272,3 +272,10 @@ Then I rebooted and it was OK ;)
 ```
 Note: If running Desktop headless:
 Use sudo raspi-config to set a screen resolution to something other than default.
+
+
+# HDD RELATES USEFULL COMMANDS
+```
+sudo mkfs.ext4 /dev/sda1 -L GBOX
+```
+
