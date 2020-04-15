@@ -275,7 +275,10 @@ Use sudo raspi-config to set a screen resolution to something other than default
 
 
 # HDD RELATES USEFULL COMMANDS
+https://www.tomshardware.com/news/boot-raspberry-pi-from-usb,39782.html
 ```
 sudo mkfs.ext4 /dev/sda1 -L GBOX
+
+sudo rsync -avx / /media/pi/GBOX
 ```
 
