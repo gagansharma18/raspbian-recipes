@@ -319,5 +319,124 @@ https://www.raspberrypi.org/forums/viewtopic.php?f=27&t=8714
 https://wiki.archlinux.org/index.php/Transmission
 
 
-# very new method
+# TORRENT very new method USE THIS ONLY
 https://pimylifeup.com/raspberry-pi-transmission/
+
+```
+1. The first thing we do before we install the Transmission torrent client to our Raspberry Pi is to update and upgrade our package list.
+
+We can run these updates by running the following two commands on the Raspberry Pi.
+
+sudo apt update
+sudo apt upgrade
+
+2. With the Raspberry Pi now up to date, let’s now go ahead and install the transmission torrent daemon to the Raspberry Pi.
+
+Run the command below to install transmission to the Raspberry Pi.
+
+sudo apt install transmission-daemon
+ Configuring the Transmission Software
+1. As the Raspberry Pi Transmission software is automatically started, we will need to stop the service temporarily by running the command below.
+
+sudo systemctl stop transmission-daemon
+2. Next, we will go ahead and create two different folders. The first is where we will store the in-progress torrents, and the second is where we will store complete torrents.
+
+The folders will be called “torrent-inprogress” and  “torrent-complete“.
+
+We will be creating these two folders on a drive we have mounted at “/media/NASHDD1/“. This folder is on an external hard drive and is accessible via a Samba file server.
+
+sudo mkdir -p /media/NASHDD1/torrent-inprogress
+sudo mkdir -p /media/NASHDD1/torrent-complete
+3. We need to go ahead and give the “pi” user access to the two folders we just created. Providing the “pi” user access will stop permission issues later on in the tutorial.
+
+
+Run the following two commands to give the pi user access over the folders.
+
+sudo chown -R pi:pi /media/NASHDD1/torrent-inprogress
+sudo chown -R pi:pi /media/NASHDD1/torrent-complete
+4. Before we start using Transmission on our Pi, we need to make changes to its config file.
+
+Begin editing Transmission’s config file by running the following command.
+
+sudo nano /etc/transmission-daemon/settings.json
+5. Within this file, we will need to go ahead and modify the following configuration options.
+
+"incomplete-dir": "/media/NASHDD1/torrent-inprogress",
+For this option, we define the directory that we want to use for our incomplete torrents. In our example this is “/media/NASHDD1/torrent-inprogress/“.
+
+"download-dir": "/media/NASHDD1/torrent_complete",
+Next, we need to define the directory where we will store all our completed torrent downloads. In this example, the directory will be “/media/NASHDD1/torrent_complete“.
+
+"incomplete-dir-enabled": true,
+Set “incomplete-dir-enabled” to true so that Transmission uses our “torrent-inprogress” directory.
+
+"rpc-password": "Your_Password",
+Here we need to define the password for Transmissions remote control ability. Make sure this is something memorable but secure as its what you will use to access the web interface.
+
+This value will be automatically hashed when Transmission starts up again.
+
+"rpc-username": "Your_Username",
+Next, we define the username we want to use to connect to Transmission.
+
+"rpc-whitelist": "192.168.*.*",
+Here we set the whitelist for Transmission. By default, this is set only to allow the localhost to connect.
+
+Instead, we will change this to allow anyone on your local network to connect. If you need more information on all these settings, be sure to hit up transmissions GitHub.
+
+ Changing the Transmission Daemon User
+1. Next, we need to edit the Transmission daemon startup script so that it uses the “pi” user instead of the default “debian-transmission” user.
+
+We can begin modifying the init script by running the command below.
+
+sudo nano /etc/init.d/transmission-daemon
+2. In here, we need to edit the “USER=” line, so that the Transmission daemon will be run by the “pi” user and not the “debian-transmission” user that is setup by default.
+
+We do this as the folder we are going to store our torrents in is owned by the “pi” user.
+
+If you intend on using a different user, make sure you use that instead of “pi“.
+
+USER=pi
+Once done, we need to save and quit by pressing Ctrl + X then pressing Y and then ENTER.
+
+3. We also need to change the user from “debian-transmission” to “pi” in the service file. Otherwise, Transmission will be started up by the “debian-transmission” user.
+
+Begin modifying the service file by running the following command.
+
+sudo nano /etc/systemd/system/multi-user.target.wants/transmission-daemon.service
+4. Within this file, we need to go ahead and change the “User=” line so that it points to the “pi” user instead.
+
+user=pi
+Once done, we need to save and quit by pressing Ctrl + X then pressing Y and then ENTER.
+
+5. Now we need to tell the service manager to reload all service configuration files by running the following command. Otherwise, systemctl will try to use the older version of the service file.
+
+sudo systemctl daemon-reload
+6. As we have changed the user from “debian-transmission” to “pi” we will need to go ahead and take ownership of the “/etc/transmission-daemon” folder.
+
+We can do this by running the following command.
+
+sudo chown -R pi:pi /etc/transmission-daemon
+7. Next, we need to create a directory where the transmission-daemon will access the “setting.json” file.
+
+We also to need to create a symbolic link back to the settings file that we edited earlier on in the tutorial. The file will exist in both directories thanks to the symbolic link.
+
+sudo mkdir -p /home/pi/.config/transmission-daemon/
+sudo ln -s /etc/transmission-daemon/settings.json /home/pi/.config/transmission-daemon/
+sudo chown -R pi:pi /home/pi/.config/transmission-daemon/
+8. Now that we have finally configured everything correctly, we can go ahead and start back up the Transmission daemon service on our Raspberry Pi.
+
+To start up the service, you need to run the following command.
+
+sudo systemctl start transmission-daemon
+ Accessing Transmission’s Web Interface
+1. We can finally check out Transmissions web interface by going to the Raspberry Pi’s IP address followed by the port “:9091“.
+
+If you don’t know what your Pi’s local IP address is, you can retrieve it by using the command “hostname -I” on your Raspberry Pi.
+
+Replace “<IPADDRESS>” in the URL below with your Pi’s local IP address to go to Transmission’s web interface.
+
+http://<IPADDRESS>:9091
+2. Before you can proceed to the Transmission web interface, you will be first asked to enter the username and password that you set earlier on in this guide.
+
+Within the web interface, you can add and remove torrents, change settings, set schedules, and much more.
+```
