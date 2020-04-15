@@ -281,4 +281,39 @@ sudo mkfs.ext4 /dev/sda1 -L GBOX
 
 sudo rsync -avx / /media/pi/GBOX
 ```
+# NEW TORRENT PERMISSION FIX
 
+
+After lots of reading and frustration. First of all, make sure the normal user has read and write acces to the USB drive. The correct 'non-root' fix for having write acces to the USB drive is:
+
+Step 1: Stop transmission daemon
+```
+sudo service transmission-daemon stop
+```
+Step 2: Add pi to debian-transmission group
+```
+sudo usermod -a -G debian-transmission pi 
+```
+Step 3: changing the daemon-user
+```
+sudo nano /etc/init.d/transmission-daemon
+Change USER to pi.
+```
+Step 4 Change the rights of the configuration files folder
+```
+sudo chown -R pi /var/lib/transmission-daemon/info/
+sudo chmod 755 /var/lib/transmission-daemon/info/settings.json 
+```
+Step 5: Set the correct permissions for the download / incomplete folders
+```
+sudo chown -R pi /somewhere/downloads
+sudo chown -R pi /somewhere/incomplete
+```
+Step 5: Start transmission daemon
+```
+sudo service transmission-daemon start
+```
+Compiled from:
+
+https://www.raspberrypi.org/forums/viewtopic.php?f=27&t=8714
+https://wiki.archlinux.org/index.php/Transmission
