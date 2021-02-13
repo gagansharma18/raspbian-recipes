@@ -94,3 +94,19 @@ Configuration for eap should look like this:
     }
 
 Suggestions and PRs are welcome to make these recipes more useful.
+
+
+
+
+REMOTE ACCESS DATAPLICITY
+
+root access use 
+```
+su pi
+```
+
+give gio permission to dataplicity so no root access is required
+```
+sudo usermod -a -G gpio dataplicity
+sudo reboot
+```
